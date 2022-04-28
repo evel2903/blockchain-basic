@@ -1,15 +1,17 @@
 {
-  "name": "anmmt",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "dev": "node --experimental-modules --es-module-specifier-resolution=node index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "crypto-js": "^4.1.1"
-  }
+    "name": "anmmt",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "node --experimental-modules --es-module-specifier-resolution=node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "crypto-js": "^4.1.1",
+        "dotenv": "^16.0.0",
+        "elliptic": "^6.5.4"
+    }
 }
