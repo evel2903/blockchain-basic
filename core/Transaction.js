@@ -13,7 +13,11 @@ class Transaction {
 
     sign(keyPair) {
         if (keyPair.getPublic("hex") === this.from) {
-            this.signature = keyPair.sign(SHA256(this.from + this.to + this.amount + this.gas).toString(), "base64").toDER("hex")
+            //this.signature = keyPair.sign(SHA256(this.from + this.to + this.amount + this.gas).toString(), "base64").toDER("hex")
+
+            let msgHash = SHA256(this.from + this.to + this.amount + this.gas).toString()
+            let privKey = keyPair.getPrivate('hex')
+            this.signature = ec.sign(msgHash, privKey, "hex", { canonical: true })
         }
     }
 
@@ -22,7 +26,6 @@ class Transaction {
             tx.from &&
             tx.to &&
             tx.amount &&
-            // Add gas
             (chain.getBalance(tx.from) >= tx.amount + tx.gas || tx.from === MINT_PUBLIC_ADDRESS && tx.amount === chain.reward) &&
             ec.keyFromPublic(tx.from, "hex").verify(SHA256(tx.from + tx.to + tx.amount + tx.gas).toString(), tx.signature)
         )
