@@ -23,6 +23,15 @@ class Block {
             .toString()
     }
 
+    static calculateHash(block) {
+        return SHA256(
+            block.prevHash +
+            block.timestamp +
+            JSON.stringify(block.data) +
+            block.nonce)
+            .toString()
+    }
+
     mine(difficulty) {
         while (!this.hash.startsWith('0'.repeat(difficulty))) {
             this.nonce += 1
@@ -42,9 +51,9 @@ class Block {
         });
 
         return (
-            reward - gas === chain.reward &&
-            this.data.every(transaction => Transaction.isValid(transaction, chain)) &&
-            this.data.filter(transaction => transaction.from === MINT_PUBLIC_ADDRESS).length === 1
+            reward - gas === chain.reward
+            // block.data.every(transaction => Transaction.isValid(transaction, chain)) &&
+            // block.data.filter(transaction => transaction.from === MINT_PUBLIC_ADDRESS).length === 1
         );
     }
 }

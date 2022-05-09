@@ -10,7 +10,7 @@ const ec = new EC.ec("secp256k1")
 const HOLDER_PUBLIC_ADDRESS = process.env.HOLDER_PUBLIC_ADDRESS
 const holderKeyPair = ec.keyFromPrivate(process.env.HOLDER_PRIVATE_KEY, "hex")
 
-const XChain = new Blockchain(4)
+const XChain = new Blockchain(3)
 
 const xWallet = ec.genKeyPair()
 
@@ -35,3 +35,19 @@ XChain.mineTransactions(minerAddress)
 console.log("HOLDER balance:", XChain.getBalance(HOLDER_PUBLIC_ADDRESS))
 console.log("X's balance:", XChain.getBalance(xPublicAddress))
 console.log("Miner balance:", XChain.getBalance(minerAddress))
+
+console.log('\n\n');
+
+console.log('Log all block.......................');
+XChain.chain.forEach(block => {
+    console.log('block: ', block.data);
+})
+
+//XChain.chain[1].data[1].amount = 10000
+
+XChain.chain.forEach(block => {
+    console.log('block: ', block.data);
+})
+console.log('\n\n');
+
+console.log(`XChain is Valid: ${Blockchain.isValid(XChain)}`);

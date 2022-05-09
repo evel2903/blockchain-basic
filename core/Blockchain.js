@@ -90,7 +90,7 @@ class Blockchain {
             const prevBlock = blockchain.chain[i - 1]
 
             if (
-                currentBlock.hash !== Block.getHash(currentBlock) ||
+                currentBlock.hash !== Block.calculateHash(currentBlock) ||
                 prevBlock.hash !== currentBlock.prevHash ||
                 !Block.hasValidTransactions(currentBlock, blockchain)
             ) {
